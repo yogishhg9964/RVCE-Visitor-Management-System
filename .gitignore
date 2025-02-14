@@ -78,6 +78,8 @@ GoogleService-Info.plist
 # Environment files
 .env
 .env.*
+.env.local
+*.env
 
 # Coverage reports
 coverage/

@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -16,73 +17,14 @@ import 'package:flutter/foundation.dart'
 /// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
-      return web;
-    }
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
-        return android;
-      case TargetPlatform.iOS:
-        return ios;
-      case TargetPlatform.macOS:
-        return macos;
-      case TargetPlatform.windows:
-        return windows;
-      case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
-      default:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions are not supported for this platform.',
-        );
-    }
+    return FirebaseOptions(
+      apiKey: dotenv.env['FIREBASE_API_KEY'] ?? '',
+      appId: dotenv.env['FIREBASE_APP_ID'] ?? '',
+      messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? '',
+      projectId: dotenv.env['FIREBASE_PROJECT_ID'] ?? '',
+      storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'] ?? '',
+      iosClientId: dotenv.env['FIREBASE_IOS_CLIENT_ID'] ?? '',
+      iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID'] ?? '',
+    );
   }
-
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCv6Sv4yOBJRlxoRBPF0q00UnFDnqjtoDc',
-    appId: '1:604803520788:web:e564fc98cc09f1659bca01',
-    messagingSenderId: '604803520788',
-    projectId: 'rvvm-e8876',
-    authDomain: 'rvvm-e8876.firebaseapp.com',
-    storageBucket: 'rvvm-e8876.firebasestorage.app',
-    measurementId: 'G-WC3T3RNWCT',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBARtbHL9iTed8ju59GSdtyiIVmZvB54Ug',
-    appId: '1:604803520788:android:34349fb419e498c79bca01',
-    messagingSenderId: '604803520788',
-    projectId: 'rvvm-e8876',
-    storageBucket: 'rvvm-e8876.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDk3oZNdJM8k2N6wpIBzjW0Gy3yCJZlBA8',
-    appId: '1:521022903787:ios:57b68717bb86b71f4975ae',
-    messagingSenderId: '521022903787',
-    projectId: 'rvcevm',
-    storageBucket: 'rvcevm.firebasestorage.app',
-    iosBundleId: 'com.example.flutterApplication1',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDk3oZNdJM8k2N6wpIBzjW0Gy3yCJZlBA8',
-    appId: '1:521022903787:ios:57b68717bb86b71f4975ae',
-    messagingSenderId: '521022903787',
-    projectId: 'rvcevm',
-    storageBucket: 'rvcevm.firebasestorage.app',
-    iosBundleId: 'com.example.flutterApplication1',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBqHBNIAEkfeMBxah7x1C9LVONYCQjaj0Q',
-    appId: '1:521022903787:web:9ad10db608699b504975ae',
-    messagingSenderId: '521022903787',
-    projectId: 'rvcevm',
-    authDomain: 'rvcevm.firebaseapp.com',
-    storageBucket: 'rvcevm.firebasestorage.app',
-    measurementId: 'G-41DPMZHS46',
-  );
 }
