@@ -11,7 +11,7 @@ A comprehensive visitor management system built with Flutter for RV College of E
 - Photo and document upload capability
 - QR code generation for visitors
 - Visit history tracking
-
+-->
 ### Host Management
 - Host registration and profile management
 - Real-time visitor approval system
